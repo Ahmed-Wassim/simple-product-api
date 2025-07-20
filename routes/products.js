@@ -30,6 +30,7 @@ router.post("/", upload.single("manual"), async (req, res) => {
       ids: [product._id.toString()],
       documents: [text],
       embeddings: [embedding],
+      metadatas: [{ productId: product._id.toString() }],
     });
 
     res.status(201).json(product);
@@ -46,6 +47,7 @@ router.post("/:id/ask", async (req, res) => {
   const result = await collection.query({
     queryEmbeddings: [embeddingQ],
     nResults: 1,
+    where: { productId: req.params.id },
   });
   const matchedText = result.documents[0][0];
   res.json({ answer: matchedText });
