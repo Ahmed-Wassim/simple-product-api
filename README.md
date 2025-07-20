@@ -4,14 +4,24 @@ A Node.js API to manage products with PDF manuals, semantic search using embeddi
 
 ---
 
+## ⚠️ OpenAI Integration Notice
+
+Please note that this project has not been fully tested beyond the point of OpenAI API integration.
+
+Due to the cost associated with OpenAI API usage, embedding and querying operations using OpenAI's models (e.g., text embeddings) have not been executed in a production environment. All related functionality is implemented but remains unverified with actual API calls.
+
+You may need to configure your own OpenAI API key and monitor usage if you wish to test or deploy these features.
+
+---
+
 ## 🔧 Tech Stack
 
-- **Node.js 22** + Express  
-- **MongoDB** (via Docker)  
-- **ChromaDB** (via Docker) – vector store  
-- **OpenAI** – embeddings & generative simplification  
-- **pdf.js-extract** – PDF text extraction  
-- **multer** – file uploads  
+- **Node.js 22** + Express
+- **MongoDB** (via Docker)
+- **ChromaDB** (via Docker) – vector store
+- **OpenAI** – embeddings & generative simplification
+- **pdf.js-extract** – PDF text extraction
+- **multer** – file uploads
 - **dotenv**
 
 ---
@@ -117,15 +127,19 @@ ai-products-api/
 ## ✨ API Endpoints
 
 ### - `POST /products`
+
 Form-data: `name`, `description`, `manual` (PDF)
 
 ### - `GET /products`
+
 List all products
 
 ### - `POST /products/:id/ask`
+
 ```json
 { "question": "How do I turn on the smart lamp?" }
 ```
+
 Response:
 
 ```json
@@ -139,25 +153,25 @@ Response:
 
 ## ⚙️ Workflow
 
-1. Upload PDF → stored via multer  
-2. Extract PDF text  
-3. Generate embeddings → store in Chroma  
+1. Upload PDF → stored via multer
+2. Extract PDF text
+3. Generate embeddings → store in Chroma
 4. On user question → search → simplify with GPT
 
 ---
 
 ## 🧩 Future Improvements
 
-- PDF chunking  
-- Redis caching  
-- Cron + BullMQ  
-- Error handling  
+- PDF chunking
+- Redis caching
+- Cron + BullMQ
+- Error handling
 - Unit tests & CI/CD
 
 ---
 
 ## 🧭 Running the App
 
-1. `docker-compose up -d --build`  
-2. Test endpoints via Postman  
+1. `docker-compose up -d --build`
+2. Test endpoints via Postman
 3. Logs: `docker-compose logs -f app`
