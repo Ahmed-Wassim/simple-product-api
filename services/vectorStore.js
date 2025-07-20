@@ -1,4 +1,3 @@
-// services/vectorStore.js
 const OpenAI = require("openai");
 const { ChromaClient } = require("chromadb");
 require("dotenv").config();
